@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Книга рецептов</title>
 </head>
 <body>
-     <a href="./registration.html">нажми</a>
+    <a href="./registration.html">нажми</a>
     <a href="./login.html">логин</a>
 
-    <div id="recipes-list">Загрузка</div>
+    <div id="search-block">
+        <input type="text" id="search-input" placeholder="Поиск по названию рецепта">
+        <select id="category-filter">
+            <option value="Все">Все</option>
+            <option value="Breakfast">Завтраки</option>
+            <option value="Lunch">Обеды</option>
+            <option value="Dinner">Ужины</option>
+            <option value="Dessert">Десерты</option>
+        </select>
+        <button type="button" id="search-btn">Найти</button>
+    </div>
+    <select id="sort-select">
+            <option value="default">По умолчанию</option>
+            <option value="newest">Сначала новые</option>
+            <option value="oldest">Сначала старые</option>
+            <option value="title-asc">По названию А-Я</option>
+            <option value="title-desc">По названию Я-А</option>
+        </select>
+        <button type="button" id="search-btn">Найти</button>
+    </div>
+
+    <div id="recipes-list">Загрузка...</div>
+    <button type="button" id="load-more-btn" style="display: none;">
+        Показать ещё
+    </button>
 
     <script type="module" src="./js/recipes.js"></script>
 </body>
