@@ -59,6 +59,7 @@ form.addEventListener("submit", async (event) => {
             emailValue,
             passwordValue
         );
+        window.location.href = "./profile.html";
         await setDoc(
             doc(db, "users", userCredential.user.uid), 
             {

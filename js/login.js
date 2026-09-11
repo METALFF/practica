@@ -41,7 +41,8 @@ loginForm.addEventListener("submit", async (event) => {
             loginEmailValue,
             loginPasswordValue
         )
-        console.log(userCredential.user);
+        console.log("Вход успешен");
+        window.location.href = "./profile.html";
     } catch (error) {
         if(error.code === "auth/invalid-email") {
             loginEmail.value = "";
