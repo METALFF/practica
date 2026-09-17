@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рецепт</title>
+    <link rel="stylesheet" href="./css/recipe.css">
+</head>
+<body>
+    <a href="./index.html">← Назад к каталогу</a>
+
+    <div id="recipe-container">Загрузка...</div>
+
+    <section id="reviews-section">
+        <h2>Отзывы</h2>
+
+        <form id="reviewForm" class="review-form" hidden>
+            <textarea
+                id="reviewText"
+                rows="4"
+                placeholder="Напишите ваш отзыв о рецепте"></textarea>
+            <button type="submit" id="reviewSubmit">Отправить отзыв</button>
+        </form>
+
+        <p id="reviewGuestMessage" hidden>
+            Чтобы оставить отзыв, <a href="./login.html">войдите</a>
+            или <a href="./registration.html">зарегистрируйтесь</a>.
+        </p>
+
+        <div id="reviewsContainer">Загрузка отзывов...</div>
+    </section>
+
+    <script type="module" src="./js/recipe.js"></script>
+</body>
+</html>

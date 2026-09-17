@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
-    
+    <a href="./index.html">← На главную</a>
+
+    <div id="accessDenied" hidden>
+        <p>Доступ только для администраторов.</p>
+    </div>
+
+    <div id="adminPanel" hidden>
+        <h1>Админ-панель</h1>
+
+        <section id="recipe-form-section">
+            <h2 id="formTitle">Добавить рецепт</h2>
+            <form id="recipeForm">
+                <input type="hidden" id="recipeDocId">
+
+                <input type="text" id="recipeTitle" placeholder="Название" required>
+
+                <select id="recipeCategory" required>
+                    <option value="" disabled selected>Категория</option>
+                    <option value="Завтраки">Завтраки</option>
+                    <option value="Обеды">Обеды</option>
+                    <option value="Ужины">Ужины</option>
+                    <option value="Десерты">Десерты</option>
+                </select>
+
+                <input type="url" id="recipeImage" placeholder="Ссылка на изображение" required>
+
+                <textarea id="recipeIngredients" placeholder="Ингредиенты, каждый с новой строки" required></textarea>
+
+                <textarea id="recipeInstructions" placeholder="Инструкции приготовления" required></textarea>
+
+                <button type="submit" id="recipeSubmitBtn">Добавить</button>
+                <button type="button" id="recipeCancelBtn" hidden>Отмена</button>
+            </form>
+        </section>
+
+        <section id="recipes-admin-section">
+            <h2>Рецепты</h2>
+            <div id="adminRecipesList">Загрузка...</div>
+        </section>
+
+        <section id="users-admin-section">
+            <h2>Пользователи</h2>
+            <div id="adminUsersList">Загрузка...</div>
+        </section>
+    </div>
+
+    <script type="module" src="./js/admin.js"></script>
 </body>
 </html>
