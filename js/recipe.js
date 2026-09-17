@@ -8,7 +8,8 @@ import {
     query,
     where,
     orderBy,
-    serverTimestamp
+    serverTimestamp,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
@@ -18,6 +19,8 @@ const reviewText = document.getElementById("reviewText");
 const reviewSubmit = document.getElementById("reviewSubmit");
 const reviewGuestMessage = document.getElementById("reviewGuestMessage");
 const reviewsContainer = document.getElementById("reviewsContainer");
+const favoriteBtn = document.getElementById("favoriteBtn");
+let currentFavoriteId = null;
 
 const recipeId = new URLSearchParams(window.location.search).get("id");
 
@@ -38,6 +41,42 @@ async function loadRecipe() {
 
     showRecipe(recipeSnapshot.data());
 }
+async function checkFavorite(userId) {
+    const favQuery = query(
+        collection(db, "favorites"),
+        where("recipeId", "==", recipeId),
+        where("userId", "==", userId)
+    );
+
+    const snapshot = await getDocs(favQuery);
+
+    if (snapshot.empty) {
+        currentFavoriteId = null;
+        favoriteBtn.textContent = "В избранное";
+        return;
+    }
+
+    currentFavoriteId = snapshot.docs[0].id;
+    favoriteBtn.textContent = "Убрать из избранного";
+}
+
+favoriteBtn.addEventListener("click", async () => {
+    if (!reviewAuthor) {
+        return;
+    }
+
+    if (currentFavoriteId) {
+        await deleteDoc(doc(db, "favorites", currentFavoriteId));
+    } else {
+        await addDoc(collection(db, "favorites"), {
+            recipeId: recipeId,
+            userId: reviewAuthor.userId,
+            createdAt: serverTimestamp()
+        });
+    }
+
+    await checkFavorite(reviewAuthor.userId);
+});
 
 function showRecipe(recipe) {
     const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
@@ -62,6 +101,7 @@ onAuthStateChanged(auth, async (user) => {
         reviewAuthor = null;
         reviewForm.hidden = true;
         reviewGuestMessage.hidden = false;
+        favoriteBtn.hidden = true;
         return;
     }
 
@@ -76,8 +116,9 @@ onAuthStateChanged(auth, async (user) => {
 
     reviewGuestMessage.hidden = true;
     reviewForm.hidden = false;
+    favoriteBtn.hidden = false;
+    checkFavorite(user.uid);
 });
-
 
 async function loadReviews() {
     if (!recipeId) {
@@ -85,7 +126,7 @@ async function loadReviews() {
     }
 
     const reviewsQuery = query(
-        collection(db, "reviews"),
+        collection(db, "comments"),
         where("recipeId", "==", recipeId),
         orderBy("createdAt", "desc")
     );
@@ -149,7 +190,7 @@ reviewForm.addEventListener("submit", async (event) => {
     reviewSubmit.disabled = true;
 
     try {
-        await addDoc(collection(db, "reviews"), {
+        await addDoc(collection(db, "comments"), {
             recipeId: recipeId,
             userId: reviewAuthor.userId,
             username: reviewAuthor.username,

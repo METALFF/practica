@@ -1,5 +1,6 @@
-import { db } from "./firebase.js";
+import { db, auth } from "./firebase.js";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 const container = document.getElementById("recipes-list");
 const searchInput = document.getElementById("search-input");
@@ -7,12 +8,27 @@ const searchBtn = document.getElementById("search-btn");
 const categoryFilter = document.getElementById("category-filter");
 const sortSelect = document.getElementById("sort-select");
 const loadMoreBtn = document.getElementById("load-more-btn");
+const registerLink = document.getElementById("registerLink");
+const loginLink = document.getElementById("loginLink");
+const profileLink = document.getElementById("profileLink");
 
 let allRecipes = [];
 
 const PAGE_SIZE = 10;
 let currentList = [];
 let visibleCount = PAGE_SIZE;
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        registerLink.hidden = true;
+        loginLink.hidden = true;
+        profileLink.hidden = false;
+    } else {
+        registerLink.hidden = false;
+        loginLink.hidden = false;
+        profileLink.hidden = true;
+    }
+});
 
 async function loadRecipes() {
     try {
