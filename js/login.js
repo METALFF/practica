@@ -1,12 +1,12 @@
 import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
 
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
-
+const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 
 
 loginForm.addEventListener("submit", async (event) => {
@@ -57,3 +57,19 @@ loginForm.addEventListener("submit", async (event) => {
 
 })
 
+resetPasswordBtn.addEventListener("click", async () => {
+    const emailValue = loginEmail.value;
+
+    if (emailValue === "" || !loginEmail.checkValidity()) {
+        loginEmail.value = "";
+        loginEmail.placeholder = "Введите email для восстановления";
+        return;
+    }
+
+    try {
+        await sendPasswordResetEmail(auth, emailValue);
+        loginEmail.placeholder = "Письмо отправлено на почту";
+    } catch (error) {
+        loginEmail.placeholder = "Не удалось отправить письмо";
+    }
+})

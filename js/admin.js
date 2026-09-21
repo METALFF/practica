@@ -6,13 +6,16 @@ import {
     getDocs,
     addDoc,
     updateDoc,
-    deleteDoc
+    deleteDoc,
+    orderBy,
+    query
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 const accessDenied = document.getElementById("accessDenied");
 const adminPanel = document.getElementById("adminPanel");
 
+const adminCommentsList = document.getElementById("adminCommentsList");
 const recipeForm = document.getElementById("recipeForm");
 const recipeDocId = document.getElementById("recipeDocId");
 const recipeTitle = document.getElementById("recipeTitle");
@@ -45,6 +48,7 @@ onAuthStateChanged(auth, async (user) => {
     adminPanel.hidden = false;
     loadRecipes();
     loadUsers();
+    loadComments();
 });
 
 async function loadRecipes() {
@@ -174,4 +178,46 @@ async function toggleRole(uid, currentRole) {
     const newRole = currentRole === "admin" ? "user" : "admin";
     await updateDoc(doc(db, "users", uid), { role: newRole });
     await loadUsers();
+}
+async function loadComments() {
+    const commentsQuery = query(
+        collection(db, "comments"),
+        orderBy("createdAt", "desc")
+    );
+
+    const snapshot = await getDocs(commentsQuery);
+
+    if (snapshot.empty) {
+        adminCommentsList.textContent = "Отзывов пока нет";
+        return;
+    }
+
+    adminCommentsList.innerHTML = "";
+
+    snapshot.forEach((docSnap) => {
+        adminCommentsList.appendChild(buildCommentRow(docSnap.id, docSnap.data()));
+    });
+}
+
+function buildCommentRow(id, comment) {
+    const row = document.createElement("div");
+    row.className = "admin-row";
+
+    const info = document.createElement("span");
+    info.textContent = `${comment.username}: ${comment.text}`;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Удалить";
+    deleteBtn.addEventListener("click", () => removeComment(id));
+
+    row.append(info, deleteBtn);
+    return row;
+}
+
+async function removeComment(id) {
+    const confirmed = window.confirm("Удалить этот отзыв?");
+    if (!confirmed) return;
+
+    await deleteDoc(doc(db, "comments", id));
+    await loadComments();
 }

@@ -9,7 +9,8 @@ import {
     where,
     orderBy,
     serverTimestamp,
-    deleteDoc
+    deleteDoc,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
@@ -120,7 +121,7 @@ onAuthStateChanged(auth, async (user) => {
     checkFavorite(user.uid);
 });
 
-async function loadReviews() {
+function loadReviews() {
     if (!recipeId) {
         return;
     }
@@ -131,17 +132,17 @@ async function loadReviews() {
         orderBy("createdAt", "desc")
     );
 
-    const reviewsSnapshot = await getDocs(reviewsQuery);
+    onSnapshot(reviewsQuery, (snapshot) => {
+        if (snapshot.empty) {
+            reviewsContainer.textContent = "Отзывов пока нет. Будьте первым!";
+            return;
+        }
 
-    if (reviewsSnapshot.empty) {
-        reviewsContainer.textContent = "Отзывов пока нет. Будьте первым!";
-        return;
-    }
+        reviewsContainer.innerHTML = "";
 
-    reviewsContainer.innerHTML = "";
-
-    reviewsSnapshot.forEach((reviewDoc) => {
-        reviewsContainer.appendChild(buildReviewItem(reviewDoc.data()));
+        snapshot.forEach((reviewDoc) => {
+            reviewsContainer.appendChild(buildReviewItem(reviewDoc.data()));
+        });
     });
 }
 
@@ -199,7 +200,6 @@ reviewForm.addEventListener("submit", async (event) => {
         });
 
         reviewForm.reset();
-        await loadReviews();
     } catch (error) {
         console.error("Не удалось сохранить отзыв:", error);
         reviewText.placeholder = "Ошибка при отправке. Попробуйте ещё раз";
