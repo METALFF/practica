@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Вход</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/auth.css">
 </head>
-<body>
-    <form id="loginForm">
-    <input id="loginEmail" type="email" placeholder="Введите email">
-    <input id="loginPassword" type="password" placeholder="Введите пароль">
-    <button>Войти</button>
-    <a href="./registration.html">Регать</a>
-</form>
-<button type="button" id="resetPasswordBtn">Забыли пароль?</button>
-<script type="module" src="./js/login.js"></script>
+<body class="auth-page">
+    <div class="auth-card">
+        <h1>Вход</h1>
+        <form id="loginForm" class="auth-form">
+            <input id="loginEmail" type="email" placeholder="Введите email">
+            <input id="loginPassword" type="password" placeholder="Введите пароль">
+            <button>Войти</button>
+        </form>
+        <button type="button" id="resetPasswordBtn" class="auth-link-btn">Забыли пароль?</button>
+        <p class="auth-switch">Нет аккаунта? <a href="./registration.html">Зарегистрироваться</a></p>
+    </div>
 </body>
+<script type="module" src="./js/login.js"></script>
 </html>

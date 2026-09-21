@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/profile.css">
 </head>
 <body>
-    <a href="./index.html">← На главную</a>
-    <button id="logoutButton">Выйти</button>
+    <div class="profile-topbar">
+        <a href="./index.html" class="back-link">← На главную</a>
+        <button id="logoutButton" class="logout-btn">Выйти</button>
+    </div>
 
     <section id="profile-section">
         <h1>Мой профиль</h1>
@@ -23,8 +29,7 @@
         <h2>Мои отзывы</h2>
         <div id="myReviewsList">Загрузка...</div>
     </section>
-    <a href="./admin.html" id="adminLink" hidden>Админ-панель</a>
-    
+    <a href="./admin.html" id="adminLink" class="admin-link" hidden>Админ-панель</a>
 
     <script type="module" src="./js/profile.js"></script>
 </body>

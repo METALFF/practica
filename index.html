@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Книга рецептов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <a href="./registration.html" id="registerLink">регистрация</a>
-    <a href="./login.html" id="loginLink">логин</a>
-    <a href="./profile.html" id="profileLink" hidden>Личный кабинет</a> 
-    <a href="./favorites.html">избранное</a>
+    <header class="site-header">
+        <a href="./index.html" class="site-title">Книга рецептов</a>
+        <nav class="site-nav">
+            <a href="./registration.html" id="registerLink">регистрация</a>
+            <a href="./login.html" id="loginLink">логин</a>
+            <a href="./profile.html" id="profileLink" hidden>Личный кабинет</a>
+            <a href="./favorites.html">избранное</a>
+        </nav>
+    </header>
+
     <div id="search-block">
         <input type="text" id="search-input" placeholder="Поиск по названию рецепта">
         <select id="category-filter">
             <option value="Все">Все</option>
-            <option value="Breakfast">Завтраки</option>
-            <option value="Lunch">Обеды</option>
-            <option value="Dinner">Ужины</option>
-            <option value="Dessert">Десерты</option>
+            <option value="Завтраки">Завтраки</option>
+            <option value="Обеды">Обеды</option>
+            <option value="Ужины">Ужины</option>
+            <option value="Десерты">Десерты</option>
         </select>
-        <button type="button" id="search-btn">Найти</button>
-    </div>
-    <select id="sort-select">
+        <select id="sort-select">
             <option value="default">По умолчанию</option>
             <option value="newest">Сначала новые</option>
             <option value="oldest">Сначала старые</option>

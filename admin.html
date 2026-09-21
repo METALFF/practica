@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
-    <a href="./index.html">← На главную</a>
+    <a href="./index.html" class="back-link">← На главную</a>
 
     <div id="accessDenied" hidden>
         <p>Доступ только для администраторов.</p>
     </div>
 
-    <div id="adminPanel" hidden>
+    <div id="adminPanel" class="admin-panel" hidden>
         <h1>Админ-панель</h1>
 
-        <section id="recipe-form-section">
+        <section id="recipe-form-section" class="admin-card">
             <h2 id="formTitle">Добавить рецепт</h2>
-            <form id="recipeForm">
+            <form id="recipeForm" class="admin-form">
                 <input type="hidden" id="recipeDocId">
 
                 <input type="text" id="recipeTitle" placeholder="Название" required>
@@ -37,22 +41,26 @@
 
                 <textarea id="recipeInstructions" placeholder="Инструкции приготовления" required></textarea>
 
-                <button type="submit" id="recipeSubmitBtn">Добавить</button>
-                <button type="button" id="recipeCancelBtn" hidden>Отмена</button>
+                <div class="admin-form-actions">
+                    <button type="submit" id="recipeSubmitBtn">Добавить</button>
+                    <button type="button" id="recipeCancelBtn" class="btn-secondary" hidden>Отмена</button>
+                </div>
             </form>
         </section>
 
-        <section id="recipes-admin-section">
+        <section id="recipes-admin-section" class="admin-card">
             <h2>Рецепты</h2>
-            <div id="adminRecipesList">Загрузка...</div>
+            <div id="adminRecipesList" class="admin-list">Загрузка...</div>
         </section>
-        <section id="comments-admin-section">
+
+        <section id="comments-admin-section" class="admin-card">
             <h2>Модерация отзывов</h2>
-            <div id="adminCommentsList">Загрузка...</div>
+            <div id="adminCommentsList" class="admin-list">Загрузка...</div>
         </section>
-        <section id="users-admin-section">
+
+        <section id="users-admin-section" class="admin-card">
             <h2>Пользователи</h2>
-            <div id="adminUsersList">Загрузка...</div>
+            <div id="adminUsersList" class="admin-list">Загрузка...</div>
         </section>
     </div>
 

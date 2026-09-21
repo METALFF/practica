@@ -60,6 +60,7 @@ function buildFavoriteRow(favoriteId, recipeId, recipe) {
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Убрать";
+    removeBtn.className = "btn-secondary";
     removeBtn.addEventListener("click", async () => {
         await deleteDoc(doc(db, "favorites", favoriteId));
         row.remove();

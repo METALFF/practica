@@ -1,0 +1,83 @@
+body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 4rem;
+}
+
+.admin-panel h1 {
+    border-bottom: 3px solid var(--color-rule);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 480px;
+}
+
+.admin-form textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg);
+}
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-row span {
+    flex: 1;
+    color: var(--color-text);
+}
+
+.admin-row button {
+    font-size: 0.85rem;
+    padding: 0.4em 0.9em;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+}
+
+.admin-row button:hover {
+    background: var(--color-accent);
+    color: var(--color-surface);
+}

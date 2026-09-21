@@ -1,0 +1,79 @@
+body {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 4rem;
+}
+
+.profile-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    color: var(--color-text-muted);
+}
+
+.logout-btn {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.logout-btn:hover {
+    background: var(--color-bg);
+}
+
+#profile-section h1 {
+    border-bottom: 3px solid var(--color-rule);
+    padding-bottom: 0.5rem;
+}
+
+#profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 360px;
+    margin-top: 1rem;
+}
+
+#profileForm button {
+    align-self: flex-start;
+}
+
+#profileEmail {
+    color: var(--color-text-muted);
+    background: var(--color-bg);
+}
+
+#history-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+}
+
+.my-review-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.my-review-row textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.my-review-row button {
+    align-self: flex-start;
+    margin-right: 0.5rem;
+}
+
+.admin-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--color-clay);
+    font-weight: 700;
+}

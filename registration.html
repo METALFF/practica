@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Регистрация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/auth.css">
 </head>
-<body>
-    <form id="registrationForm" class="registration-form" action="">
-        <input id="username" class="registration-input" type="text" placeholder="Введите имя">
-        <input id="email" class="registration-input" type="email" placeholder="Введите email">
-        <input id="password" class="registration-input" type="password" placeholder="Введите пароль">
-        <input id="confirmPassword" class="registration-input" type="password" placeholder="Подтвердите пароль">
-        <button id="registrationButton" class="registration-button">Registration</button>
-    </form>
+<body class="auth-page">
+    <div class="auth-card">
+        <h1>Регистрация</h1>
+        <form id="registrationForm" class="auth-form registration-form" action="">
+            <input id="username" class="registration-input" type="text" placeholder="Введите имя">
+            <input id="email" class="registration-input" type="email" placeholder="Введите email">
+            <input id="password" class="registration-input" type="password" placeholder="Введите пароль">
+            <input id="confirmPassword" class="registration-input" type="password" placeholder="Подтвердите пароль">
+            <button id="registrationButton" class="registration-button">Зарегистрироваться</button>
+        </form>
+        <p class="auth-switch">Уже есть аккаунт? <a href="./login.html">Войти</a></p>
+    </div>
 </body>
-
 <script type="module" src="./js/register.js"></script>
 </html>

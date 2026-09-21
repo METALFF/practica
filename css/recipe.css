@@ -1,0 +1,91 @@
+body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 4rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-muted);
+}
+
+#recipe-container h1 {
+    font-size: 2rem;
+    border-bottom: 3px solid var(--color-rule);
+    padding-bottom: 0.5rem;
+}
+
+#recipe-container img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin: 1rem 0;
+}
+
+#recipe-container p strong {
+    color: var(--color-clay);
+}
+
+#recipe-container ul {
+    padding-left: 1.25rem;
+}
+
+#recipe-container li {
+    margin-bottom: 0.35rem;
+}
+
+#favoriteBtn {
+    background: var(--color-surface);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    margin: 1rem 0 2rem;
+}
+
+#favoriteBtn:hover {
+    background: var(--color-accent);
+    color: var(--color-surface);
+}
+
+#reviews-section {
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.review-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.review-form button {
+    align-self: flex-start;
+}
+
+#reviewGuestMessage {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+}
+
+.review-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.review-header {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0 0 0.35rem;
+}
+
+.review-body {
+    margin: 0;
+}
