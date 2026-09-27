@@ -13,6 +13,8 @@ body {
 
 .back-link {
     color: var(--color-text-muted);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
 }
 
 .logout-btn {
@@ -26,8 +28,8 @@ body {
 }
 
 #profile-section h1 {
-    border-bottom: 3px solid var(--color-rule);
-    padding-bottom: 0.5rem;
+    font-size: 2.8rem;
+    color: var(--color-accent);
 }
 
 #profileForm {
@@ -36,6 +38,10 @@ body {
     gap: 0.75rem;
     max-width: 360px;
     margin-top: 1rem;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
 }
 
 #profileForm button {
@@ -49,16 +55,24 @@ body {
 
 #history-section {
     margin-top: 3rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 2px dashed var(--color-border);
     padding-top: 2rem;
+}
+
+#history-section h2 {
+    font-size: 2rem;
+    color: var(--color-sage);
 }
 
 .my-review-row {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
 }
 
 .my-review-row textarea {
@@ -74,6 +88,7 @@ body {
 .admin-link {
     display: inline-block;
     margin-top: 2rem;
-    color: var(--color-clay);
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-accent);
 }

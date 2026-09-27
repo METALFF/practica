@@ -8,24 +8,57 @@ body {
     display: inline-block;
     margin-bottom: 1.5rem;
     color: var(--color-text-muted);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+}
+
+#recipe-container {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+    position: relative;
+    transform: rotate(-0.6deg);
+}
+
+#recipe-container::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 32px;
+    width: 90px;
+    height: 26px;
+    background: rgba(232, 193, 90, 0.55);
+    border: 1px solid rgba(61, 43, 31, 0.08);
+    transform: rotate(-3deg);
 }
 
 #recipe-container h1 {
-    font-size: 2rem;
-    border-bottom: 3px solid var(--color-rule);
-    padding-bottom: 0.5rem;
+    font-size: 3rem;
+    line-height: 1.05;
+    color: var(--color-accent);
 }
 
 #recipe-container img {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: var(--radius);
+    border: 10px solid #FFFFFF;
+    border-bottom-width: 32px;
+    box-shadow: 0 1px 4px rgba(61, 43, 31, 0.2);
     margin: 1rem 0;
 }
 
 #recipe-container p strong {
-    color: var(--color-clay);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-sage);
+}
+
+#recipe-container h2 {
+    font-size: 1.8rem;
+    color: var(--color-sage);
+    margin-top: 1.5rem;
 }
 
 #recipe-container ul {
@@ -33,25 +66,32 @@ body {
 }
 
 #recipe-container li {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
 }
 
 #favoriteBtn {
     background: var(--color-surface);
     color: var(--color-accent);
-    border: 1px solid var(--color-accent);
-    margin: 1rem 0 2rem;
+    border: 2px solid var(--color-accent);
+    margin: 1.5rem 0 2rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
 }
 
 #favoriteBtn:hover {
     background: var(--color-accent);
-    color: var(--color-surface);
+    color: #FFFFFF;
 }
 
 #reviews-section {
     margin-top: 2rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 2px dashed var(--color-border);
     padding-top: 2rem;
+}
+
+#reviews-section h2 {
+    font-size: 2.2rem;
+    color: var(--color-accent);
 }
 
 .review-form {
@@ -77,13 +117,14 @@ body {
 
 .review-item {
     padding: 1rem 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px dashed var(--color-border);
 }
 
 .review-header {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--color-sage);
+    margin: 0 0 0.25rem;
 }
 
 .review-body {

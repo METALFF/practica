@@ -28,6 +28,9 @@ const recipeSubmitBtn = document.getElementById("recipeSubmitBtn");
 const recipeCancelBtn = document.getElementById("recipeCancelBtn");
 
 const adminRecipesList = document.getElementById("adminRecipesList");
+const adminRecipesShowAll = document.getElementById("adminRecipesShowAll");
+const ADMIN_PAGE_SIZE = 10;
+let allRecipesData = [];
 const adminUsersList = document.getElementById("adminUsersList");
 
 
@@ -54,17 +57,32 @@ onAuthStateChanged(auth, async (user) => {
 async function loadRecipes() {
     const snapshot = await getDocs(collection(db, "recipes"));
 
-    if (snapshot.empty) {
+    allRecipesData = [];
+    snapshot.forEach((docSnap) => {
+        allRecipesData.push({ id: docSnap.id, ...docSnap.data() });
+    });
+
+    renderRecipesPage();
+}
+
+function renderRecipesPage() {
+    if (allRecipesData.length === 0) {
         adminRecipesList.textContent = "Рецептов пока нет";
         return;
     }
 
+    const itemsToShow = adminRecipesShowAll.checked
+        ? allRecipesData
+        : allRecipesData.slice(0, ADMIN_PAGE_SIZE);
+
     adminRecipesList.innerHTML = "";
 
-    snapshot.forEach((docSnap) => {
-        adminRecipesList.appendChild(buildRecipeRow(docSnap.id, docSnap.data()));
+    itemsToShow.forEach((recipe) => {
+        adminRecipesList.appendChild(buildRecipeRow(recipe.id, recipe));
     });
 }
+
+adminRecipesShowAll.addEventListener("change", renderRecipesPage);
 
 function buildRecipeRow(id, recipe) {
     const row = document.createElement("div");
