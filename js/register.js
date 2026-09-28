@@ -53,13 +53,12 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
-    try {
+        try {
         const userCredential = await createUserWithEmailAndPassword(
             auth, 
             emailValue,
             passwordValue
         );
-        window.location.href = "./profile.html";
         await setDoc(
             doc(db, "users", userCredential.user.uid), 
             {
@@ -69,7 +68,8 @@ form.addEventListener("submit", async (event) => {
             }
         );
         form.reset();
-    } catch (error) {
+        window.location.href = "./profile.html";
+    }catch (error) {
         if(error.code === "auth/email-already-in-use") {
             email.value = "";
             email.placeholder = "Этот email уже зарегистрирован";

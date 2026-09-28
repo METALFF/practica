@@ -32,6 +32,7 @@ const adminRecipesShowAll = document.getElementById("adminRecipesShowAll");
 const ADMIN_PAGE_SIZE = 10;
 let allRecipesData = [];
 const adminUsersList = document.getElementById("adminUsersList");
+const recipeVideo = document.getElementById("recipeVideo");
 
 
 onAuthStateChanged(auth, async (user) => {
@@ -54,15 +55,20 @@ onAuthStateChanged(auth, async (user) => {
     loadComments();
 });
 
-async function loadRecipes() {
-    const snapshot = await getDocs(collection(db, "recipes"));
+function fillFormForEdit(id, recipe) {
+    recipeDocId.value = id;
+    recipeTitle.value = recipe.title;
+    recipeCategory.value = recipe.category;
+    recipeImage.value = recipe.image;
+    recipeVideo.value = recipe.video || "";
+    recipeIngredients.value = Array.isArray(recipe.ingredients)
+        ? recipe.ingredients.join("\n")
+        : "";
+    recipeInstructions.value = recipe.instructions;
 
-    allRecipesData = [];
-    snapshot.forEach((docSnap) => {
-        allRecipesData.push({ id: docSnap.id, ...docSnap.data() });
-    });
-
-    renderRecipesPage();
+    formTitle.textContent = "Редактировать рецепт";
+    recipeSubmitBtn.textContent = "Сохранить";
+    recipeCancelBtn.hidden = false;
 }
 
 function renderRecipesPage() {
@@ -80,6 +86,22 @@ function renderRecipesPage() {
     itemsToShow.forEach((recipe) => {
         adminRecipesList.appendChild(buildRecipeRow(recipe.id, recipe));
     });
+}
+
+async function loadRecipes() {
+    const recipesQuery = query(
+        collection(db, "recipes"),
+        orderBy("title")
+    );
+
+    const snapshot = await getDocs(recipesQuery);
+
+    allRecipesData = snapshot.docs.map((docSnap) => ({
+        id: docSnap.id,
+        ...docSnap.data()
+    }));
+
+    renderRecipesPage();
 }
 
 adminRecipesShowAll.addEventListener("change", renderRecipesPage);
@@ -103,21 +125,6 @@ function buildRecipeRow(id, recipe) {
     return row;
 }
 
-function fillFormForEdit(id, recipe) {
-    recipeDocId.value = id;
-    recipeTitle.value = recipe.title;
-    recipeCategory.value = recipe.category;
-    recipeImage.value = recipe.image;
-    recipeIngredients.value = Array.isArray(recipe.ingredients)
-        ? recipe.ingredients.join("\n")
-        : "";
-    recipeInstructions.value = recipe.instructions;
-
-    formTitle.textContent = "Редактировать рецепт";
-    recipeSubmitBtn.textContent = "Сохранить";
-    recipeCancelBtn.hidden = false;
-}
-
 function resetForm() {
     recipeForm.reset();
     recipeDocId.value = "";
@@ -135,6 +142,7 @@ recipeForm.addEventListener("submit", async (event) => {
         title: recipeTitle.value.trim(),
         category: recipeCategory.value,
         image: recipeImage.value.trim(),
+        video: recipeVideo.value.trim(),
         ingredients: recipeIngredients.value
             .split("\n")
             .map((line) => line.trim())

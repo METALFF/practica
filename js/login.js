@@ -66,6 +66,8 @@ resetPasswordBtn.addEventListener("click", async () => {
         return;
     }
 
+    auth.languageCode = "ru";
+
     try {
         await sendPasswordResetEmail(auth, emailValue);
         loginEmail.placeholder = "Письмо отправлено на почту";

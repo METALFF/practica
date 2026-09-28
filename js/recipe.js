@@ -81,6 +81,16 @@ favoriteBtn.addEventListener("click", async () => {
 
 function showRecipe(recipe) {
     const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
+    const embedUrl = getYoutubeEmbedUrl(recipe.video);
+    const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(recipe.title + " рецепт")}`;
+
+    const videoBlock = embedUrl
+        ? `<h2>Видео</h2>
+           <div class="video-wrap">
+               <iframe src="${embedUrl}" title="${recipe.title}" allowfullscreen></iframe>
+           </div>`
+        : `<h2>Видео</h2>
+           <a href="${searchUrl}" target="_blank" rel="noopener" class="video-search-link">Найти видео-рецепт на YouTube</a>`;
 
     recipeContainer.innerHTML = `
         <h1>${recipe.title}</h1>
@@ -92,6 +102,8 @@ function showRecipe(recipe) {
 
         <h2>Инструкции</h2>
         <p>${recipe.instructions}</p>
+
+        ${videoBlock}
     `;
 
     document.title = recipe.title;
@@ -207,6 +219,31 @@ reviewForm.addEventListener("submit", async (event) => {
         reviewSubmit.disabled = false;
     }
 });
+
+function getYoutubeEmbedUrl(url) {
+    if (!url) {
+        return "";
+    }
+
+    try {
+        const parsed = new URL(url);
+        let videoId = "";
+
+        if (parsed.hostname === "youtu.be") {
+            videoId = parsed.pathname.slice(1);
+        } else if (parsed.hostname.endsWith("youtube.com")) {
+            if (parsed.pathname === "/watch") {
+                videoId = parsed.searchParams.get("v");
+            } else if (parsed.pathname.startsWith("/embed/")) {
+                videoId = parsed.pathname.split("/")[2];
+            }
+        }
+
+        return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : "";
+    } catch (error) {
+        return "";
+    }
+}
 
 loadRecipe();
 loadReviews();

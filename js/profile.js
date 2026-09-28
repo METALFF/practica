@@ -3,6 +3,7 @@ import { auth, db } from "./firebase.js";
 import {
     doc,
     getDoc,
+    setDoc,
     updateDoc,
     collection,
     query,
@@ -33,11 +34,12 @@ onAuthStateChanged(auth, async (user) => {
 
         const userDoc = doc(db, "users", user.uid);
         const userData = await getDoc(userDoc)
+        const data = userData.data() || {};
 
-        profileUsername.value = userData.data().username || "";
-        profileEmail.value = userData.data().email || "";
+        profileUsername.value = data.username || "";
+        profileEmail.value = data.email || user.email || "";
 
-        if(userData.data().role === "admin") {
+        if(data.role === "admin") {
             adminLink.hidden = false;
         }
 
@@ -50,9 +52,10 @@ onAuthStateChanged(auth, async (user) => {
 profileForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    await updateDoc(doc(db, "users", currentUid), {
-        username: profileUsername.value.trim()
-    });
+    await setDoc(doc(db, "users", currentUid), {
+        username: profileUsername.value.trim(),
+        email: profileEmail.value
+    }, { merge: true });
 })
 
 async function loadMyReviews() {
