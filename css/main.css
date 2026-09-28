@@ -244,6 +244,7 @@ input:focus, select:focus, textarea:focus {
 .open-recipe-btn:hover {
     background: var(--color-accent-hover);
     text-decoration: none;
+    color: #ffffffd0;
 }
 
 #load-more-btn {
